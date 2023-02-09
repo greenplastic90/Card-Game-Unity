@@ -10,7 +10,7 @@ public class InstantiateCards : MonoBehaviour
     private List<GameObject> cards = new List<GameObject>();
 
     private GameObject cardRemovedFromHand;
-    private bool adjustCardPositions = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +18,29 @@ public class InstantiateCards : MonoBehaviour
 
         for (int i = 0; i < numberOfCards; i++)
         {
-            Vector3 position = new Vector3((i - (numberOfCards - 1) / 2f) * offset, 0, i + 1);
+            Vector3 position = generateCardPosition(i, numberOfCards); ;
             GameObject card = Instantiate(cardPrefab, transform.position + position, Quaternion.identity);
             cards.Add(card);
             card.GetComponent<CardScript>().index = i;
         }
     }
+    private Vector3 generateCardPosition(int i, int numberOfCards)
+    {
+        return new Vector3((i - (numberOfCards - 1) / 2f) * offset, 0, i + 1);
+    }
+    private void adjustCardPositions()
+    {
 
+        Debug.Log("cards.Count => " + cards.Count);
+        for (int i = 0; i < cards.Count; i++)
+        {
+            Vector3 position = generateCardPosition(i, cards.Count);
+            MoveObject card = cards[i].GetComponent<MoveObject>();
+            StartCoroutine(card.MoveToDesiredPostion(transform.position + position));
+        }
+
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -37,7 +53,7 @@ public class InstantiateCards : MonoBehaviour
 
                 cardRemovedFromHand = cards[i];
                 cards.Remove(cards[i]);
-                adjustCardPositions = true;
+                adjustCardPositions();
             }
         }
 
@@ -47,23 +63,13 @@ public class InstantiateCards : MonoBehaviour
             {
                 cards.Insert(cardRemovedFromHand.GetComponent<CardScript>().index, cardRemovedFromHand);
                 cardRemovedFromHand = default(GameObject);
-                adjustCardPositions = true;
+                adjustCardPositions();
             }
         }
 
 
 
-        if (adjustCardPositions)
-        {
-            Debug.Log("cards.Count => " + cards.Count);
-            for (int i = 0; i < cards.Count; i++)
-            {
-                Vector3 position = new Vector3((i - (cards.Count - 1) / 2f) * offset, 0, i + 1);
-                MoveObject card = cards[i].GetComponent<MoveObject>();
-                StartCoroutine(card.MoveToDesiredPostion(transform.position + position));
-            }
-            adjustCardPositions = false;
-        }
+
 
 
     }

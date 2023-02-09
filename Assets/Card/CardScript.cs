@@ -7,6 +7,7 @@ public class CardScript : MonoBehaviour
     public Sprite spriteFaceUp;
     public Sprite spriteFaceDown;
     public bool faceUp;
+    public bool allowedToBePickedUp = true;
 
     public int index;
 
