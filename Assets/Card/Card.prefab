@@ -150,6 +150,8 @@ MonoBehaviour:
   spriteFaceUp: {fileID: 21300000, guid: 5915cdc174101e540b3349e21ee2cd74, type: 3}
   spriteFaceDown: {fileID: 21300000, guid: c7bf45f0ef95bed4491c5809fc6bf484, type: 3}
   faceUp: 0
+  allowedToBePickedUp: 1
+  index: 0
 --- !u!114 &7416726892619534754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,4 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fe95d20416e4e5581a2af88c05208d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnSpeed: 5
+  originalPosition: {x: 0, y: 0, z: 0}
+  overCollider: 0
+  returnSpeed: 20

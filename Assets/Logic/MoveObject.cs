@@ -10,7 +10,7 @@ public class MoveObject : MonoBehaviour
     public bool overCollider = false;
     private Collider2D newPositionCollider;
 
-    public float returnSpeed = 5.0f;
+    public float returnSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class MoveObject : MonoBehaviour
     {
         if (overCollider)
         {
-            transform.position = transform.position;
+            // transform.position = transform.position;
             StartCoroutine(MoveToDesiredPostion(newPositionCollider.bounds.center));
         }
         else
