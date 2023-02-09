@@ -24,6 +24,7 @@ public class InstantiateCards : MonoBehaviour
             card.GetComponent<CardScript>().index = i;
         }
     }
+
     private Vector3 generateCardPosition(int i, int numberOfCards)
     {
         return new Vector3((i - (numberOfCards - 1) / 2f) * offset, 0, i + 1);
@@ -41,6 +42,7 @@ public class InstantiateCards : MonoBehaviour
 
 
     }
+
     // Update is called once per frame
     void Update()
     {
